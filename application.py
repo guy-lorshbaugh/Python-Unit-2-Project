@@ -81,18 +81,27 @@ def team_menu():
                 continue
         teams_list = balance_teams()
         num_players = int(len(players) / len(teams))
-
-        for player in teams_list[prompt - 1]:
+        prompt = prompt - 1
+        for player in teams_list[prompt]:
             if player['experience'] == True:
                 exp_count += 1
             else:
                 inexp_count += 1
-        list = ", ".join(str(player['name']) for player in teams_list[prompt - 1])
-        print(f"\n---- {teams[prompt - 1]} ----".upper())
+        list = ", ".join(str(player['name']) for player in teams_list[prompt])
+        heights = []
+        for player in teams_list[prompt]:
+            guards = ", ".join(player['guardians'])
+        # guards = guards.join()
+        for player in teams_list[prompt]:
+            heights.append(player['height'])
+        avg_hgt = sum(heights) / len(heights)
+        print(f"\n---- {teams[prompt]} ----".upper())
         print(f"\nTotal players in Team: {num_players}")
         print(f"    - {exp_count} experienced players in team.\n    - {inexp_count} inexperienced players in team.\n")
-        print(f"Roster for the {teams[prompt - 1]}:")
-        print("   ", list, "\n") 
+        print(f"Average Player Height: {avg_hgt}\n")
+        print(f"Roster for the {teams[prompt]}:\n", "   ", list, "\n") 
+        print("Guardians:")
+        print(f"    {guards}\n")
     menu()
 
 
