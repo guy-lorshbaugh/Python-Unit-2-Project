@@ -91,7 +91,6 @@ def team_menu():
         heights = []
         for player in teams_list[prompt]:
             guards = ", ".join(player['guardians'])
-        # guards = guards.join()
         for player in teams_list[prompt]:
             heights.append(player['height'])
         avg_hgt = sum(heights) / len(heights)
