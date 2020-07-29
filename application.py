@@ -9,7 +9,6 @@ def clean_data():
     """
     players_copy = copy.deepcopy(players)
     for player in players_copy:
-        name = player['name']
         player['height'] = int(player['height'][0:2])
         player['guardians'] = player['guardians'].split(" and ")
         if player['experience'] == 'YES':
@@ -18,15 +17,6 @@ def clean_data():
             player['experience'] = False
     return players_copy
 
-cleaned_data = clean_data()
-
-experienced = [
-    player for player in cleaned_data if player['experience'] == True
-]
-
-inexperienced = [
-    player for player in cleaned_data if player['experience'] == False
-]
 
 def balance_teams():
     """Sorts players into teams by experience.
@@ -49,18 +39,17 @@ def menu():
         try:  
             menu_prompt = int(menu_prompt)
         except ValueError:
-            print("\n ERROR: Invalid entry.  Please enter a valid numeral.\n")
+            print("\n ERROR: Please enter a valid numeral from the list..\n")
             continue
         else:
             if not (1 <= menu_prompt <= 2):
-                print("\n ERROR: Please enter a valid numeral entry from the list.\n")
+                print("\n ERROR: Please enter a valid numeral from the list.\n")
                 continue
             elif menu_prompt == 2:
                 print(f"\n\n{dashes2}\nThank you for using the Basketball Stats Tool!\n{dashes2}\n\n")
                 exit()
         team_menu()
     
-
 
 def team_menu():
     """Runs the team submenu.
@@ -73,11 +62,11 @@ def team_menu():
         try:  
             prompt = int(prompt)
         except ValueError:
-            print("Invalid entry.  Please enter a valid numeral.\n")
+            print("ERROR: Please enter a valid numeral from the list.\n")
             continue
         else:
             if not (1 <= prompt <= 3):
-                print("Please enter a valid numeral entry from the list.\n")
+                print("ERROR: Please enter a valid numeral from the list.\n")
                 continue
         teams_list = balance_teams()
         num_players = int(len(players) / len(teams))
@@ -89,22 +78,26 @@ def team_menu():
                 inexp_count += 1
         list = ", ".join(str(player['name']) for player in teams_list[prompt])
         heights = []
-        for player in teams_list[prompt]:
-            guards = ", ".join(player['guardians'])
+        guards = []
         for player in teams_list[prompt]:
             heights.append(player['height'])
+        for player in teams_list[prompt]:
+            guards.extend(player['guardians'])
         avg_hgt = sum(heights) / len(heights)
         print(f"\n---- {teams[prompt]} ----".upper())
         print(f"\nTotal players in Team: {num_players}")
         print(f"    - {exp_count} experienced players in team.\n    - {inexp_count} inexperienced players in team.\n")
         print(f"Average Player Height: {avg_hgt}\n")
-        print(f"Roster for the {teams[prompt]}:\n", "   ", list, "\n") 
+        print(f"Roster for the {teams[prompt]}:\n", list, "\n") 
         print("Guardians:")
-        print(f"    {guards}\n")
+        print(*guards, sep = ", ")
     menu()
 
 
 if __name__ == '__main__':
+    cleaned_data = clean_data()
+    experienced = [player for player in cleaned_data if player['experience'] == True]
+    inexperienced = [player for player in cleaned_data if player['experience'] == False]
     dashes1 = "-" * 38
     dashes2 = "-" * 46
     print(f"\n{dashes1}\nWelcome to the Basketballl Stats Tool!\n{dashes1}\n")
