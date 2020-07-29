@@ -36,7 +36,7 @@ def menu():
         try:  
             menu_prompt = int(menu_prompt)
         except ValueError:
-            print("\n ERROR: Please enter a valid numeral from the list..\n")
+            print("\n ERROR: Please enter a valid numeral from the list.\n")
             continue
         else:
             if not (1 <= menu_prompt <= 2):
