@@ -1,9 +1,6 @@
 import copy
 import constants
 
-teams = constants.TEAMS
-players = constants.PLAYERS
-
 def clean_data():
     """Repacks constants.py into a more easily iterated list.  The height value will be an integer, experience values are converted from YES/NO to Booleans, and the guardians value will now be enclosed in a list without 'and.'
     """
@@ -84,17 +81,21 @@ def team_menu():
         for player in teams_list[prompt]:
             guards.extend(player['guardians'])
         avg_hgt = sum(heights) / len(heights)
+        avg_hgt = round(avg_hgt, 1)
         print(f"\n---- {teams[prompt]} ----".upper())
         print(f"\nTotal players in Team: {num_players}")
         print(f"    - {exp_count} experienced players in team.\n    - {inexp_count} inexperienced players in team.\n")
-        print(f"Average Player Height: {avg_hgt}\n")
-        print(f"Roster for the {teams[prompt]}:\n", list, "\n") 
+        print(f"Average Player Height: {avg_hgt} inches\n")
+        print(f"Roster for the {teams[prompt]}:")
+        print(list, "\n") 
         print("Guardians:")
         print(*guards, sep = ", ")
     menu()
 
 
 if __name__ == '__main__':
+    teams = constants.TEAMS
+    players = constants.PLAYERS
     cleaned_data = clean_data()
     experienced = [player for player in cleaned_data if player['experience'] == True]
     inexperienced = [player for player in cleaned_data if player['experience'] == False]
