@@ -32,7 +32,7 @@ def menu():
     """
     menu_prompt = None
     while menu_prompt != 2:
-        menu_prompt = input(" ---- MENU ----\n - 1. View Team Statistics\n - 2. Quit\n\nYour Selection:  ")
+        menu_prompt = input("\n ---- MENU ----\n - 1. View Team Statistics\n - 2. Quit\n\nYour Selection:  ")
         try:  
             menu_prompt = int(menu_prompt)
         except ValueError:
@@ -101,6 +101,6 @@ if __name__ == '__main__':
     inexperienced = [player for player in cleaned_data if player['experience'] == False]
     dashes1 = "-" * 38
     dashes2 = "-" * 46
-    print(f"\n{dashes1}\nWelcome to the Basketballl Stats Tool!\n{dashes1}\n")
+    print(f"\n{dashes1}\nWelcome to the Basketballl Stats Tool!\n{dashes1}")
     menu()
     
