@@ -103,3 +103,4 @@ if __name__ == '__main__':
     dashes2 = "-" * 46
     print(f"\n{dashes1}\nWelcome to the Basketballl Stats Tool!\n{dashes1}\n")
     menu()
+    
